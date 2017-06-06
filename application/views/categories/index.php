@@ -39,7 +39,7 @@
 					'description' => $product['description']
 				);
 				echo form_open('products/add', '', $hidden);
-				echo form_submit(array('value' => 'Add', 'class' => 'btn btn-default'));
+				echo form_submit('', 'Add', ($product['quantity'] == 0 ? 'class="btn btn-default" disabled' : array('class' => 'btn btn-default') ));
 				echo form_close();
 			?>
 
