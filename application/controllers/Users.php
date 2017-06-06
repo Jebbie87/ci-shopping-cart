@@ -13,9 +13,9 @@
 		public function register() {
 			$data['title'] = 'Register page';
 
-			$this->form_validation->set_rules('email', 'email', 'required');
+			$this->form_validation->set_rules('email', 'email', 'required|callback_check_email_exists');
 			$this->form_validation->set_rules('password', 'password', 'required');
-			$this->form_validation->set_rules('username', 'username', 'required');
+			$this->form_validation->set_rules('username', 'username', 'required|callback_check_username_exists');
 
 			if($this->form_validation->run() === FALSE){
 				$this->load->view('templates/header');
@@ -42,9 +42,9 @@
 				$email = $this->input->post('email');
 				$password = $this->input->post('password');
 
-				$user = $this->user_model->login_user($email, $password);
+				$user = $this->user_model->login_user($email);
 
-				if ($user) {
+				if (password_verify($password, $user['password'])) {
 					$user_data = array(
 						'username' => $user['username'],
 						'user_id' => $user['id'],
@@ -55,9 +55,11 @@
 
 					$this->session->set_flashdata('user_logged_in', 'You are now logged in');
 					redirect('products');
+
 				} else {
 					$this->session->set_flashdata('login_failed', 'Login is invalid');
 					redirect('users/login');
+
 				}
 			}
 		}
@@ -70,5 +72,23 @@
 			$this->session->set_flashdata('user_logged_out', 'You are now logged out');
 
 			redirect('products');
+		}
+
+		public function check_username_exists($username) {
+			$this->form_validation->set_message('check_username_exists', 'This username already exists');
+			if ($this->user_model->check_username_exists($username)) {
+				return true;
+			}
+
+			return false;
+		}
+
+		public function check_email_exists($email) {
+			$this->form_validation->set_message('check_email_exists', 'This email already exists');
+			if ($this->user_model->check_email_exists($email)) {
+				return true;
+			}
+
+			return false;
 		}
 	}

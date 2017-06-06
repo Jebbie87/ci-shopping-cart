@@ -24,6 +24,19 @@
 	  </div>
 	  <div class="form-group">
       <?php
+		  	$options = array();
+
+				foreach ($categories as $category) {
+					if ($category['id'] != 1) {
+						$options[$category['id']] = $category['name'];
+					}
+				}
+	    	echo form_label('Product Category');
+	  		echo form_dropdown('category_id', $options, 1, 'class="form-control"');
+	    ?>
+	  </div>
+	  <div class="form-group">
+      <?php
 	    	echo form_label('Product Description');
 	      echo form_textarea(array('name' => 'description', 'class' => 'form-control', 'placeholder' => 'Product description'));
 	    ?>

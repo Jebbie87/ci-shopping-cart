@@ -50,6 +50,8 @@
 				$this->cart_model->insert_order($item);
 			}
 			$this->session->set_flashdata('order_submitted', 'Thank you for your order!');
+
+			$this->cart_model->send_email();
 			$this->cart->destroy();
 			redirect('products');
 		}

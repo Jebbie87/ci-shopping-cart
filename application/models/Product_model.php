@@ -24,9 +24,10 @@
 				'name' => $this->input->post('name'),
 				'price' => $this->input->post('price'),
 				'description' => $this->input->post('description'),
-				'image_url' => $this->input->post('image_url'),
+				'category_id' => $this->input->post('category_id'),
 				'product_image' => $product_image,
-				'quantity' => $this->input->post('quantity')
+				'quantity' => $this->input->post('quantity'),
+				'user_id' => $this->session->userdata('user_id')
 			);
 
 			return $this->db->insert('products', $data);
@@ -39,12 +40,17 @@
 			return true;
 		}
 
-		public function update_product($qty = FALSE, $product_id = FALSE) {
+		public function update_product($qty = FALSE, $product_id = FALSE, $product_image = FALSE) {
 			$data = array(
 				'name' => $this->input->post('name'),
 				'price' => $this->input->post('price'),
 				'description' => $this->input->post('description'),
+				'category_id' => $this->input->post('category_id')
 			);
+
+			if ($product_image) {
+				$data['product_image'] = $product_image;
+			}
 
 			if ($qty and $product_id) {
 				$data = array(

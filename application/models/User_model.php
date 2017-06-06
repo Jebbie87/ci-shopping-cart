@@ -7,16 +7,15 @@
 		public function create_user() {
 			$data = array(
 				'email' => $this->input->post('email'),
-				'password' => $this->input->post('password'),
+				'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
 				'username' => $this->input->post('username')
 			);
 
 			return $this->db->insert('users', $data);
 		}
 
-		public function login_user($email, $password) {
+		public function login_user($email) {
 			$this->db->where('email', $email);
-			$this->db->where('password', $password);
 
 			$result = $this->db->get('users');
 
@@ -25,5 +24,25 @@
 			} else {
 				return false;
 			}
+		}
+
+		public function check_username_exists($username) {
+			$query = $this->db->get_where('users', array('username' => $username));
+
+			if (empty($query->row_array())) {
+				return true;
+			}
+
+			return false;
+		}
+
+		public function check_email_exists($email) {
+			$query = $this->db->get_where('users', array('email' => $email));
+
+			if (empty($query->row_array())) {
+				return true;
+			}
+
+			return false;
 		}
 	}

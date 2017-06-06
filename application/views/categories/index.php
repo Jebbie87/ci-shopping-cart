@@ -1,17 +1,20 @@
 <h1 class="page-title"><?= $title ?></h1>
 <h2 class="category-type"><?= $type ?></h2>
+
+<div>
+<div>
 <?php
 	$options = array();
+
 	foreach ($categories as $category) {
 		$options[$category['id']] = $category['name'];
 	}
+
+	echo form_open('categories');
+  echo form_dropdown('category_id', $options);
+  echo form_submit(array('value' => 'Submit', 'class' => 'btn btn-default'));
+ 	echo form_close();
 ?>
-<div>
-<div>
-<?php echo form_open('categories'); ?>
-	<?php echo form_dropdown('category_id', $options); ?>
-	<?php echo form_submit(array('value' => 'Submit', 'class' => 'btn btn-default')); ?>
-<?php echo form_close(); ?>
 </div>
 <div class="products">
 <?php foreach ($products as $product): ?>

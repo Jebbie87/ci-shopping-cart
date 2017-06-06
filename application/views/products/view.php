@@ -9,7 +9,7 @@
 			<h3><strong>Product price:</strong></h3><h4> <?php echo money_format('%.2n', $product['price']); ?></h4>
 			<h3><strong>Product description:</strong></h3> <span><?php echo $product['description']; ?></span>
 		</div>
-		<?php if ($this->session->userdata('logged_in')) : ?>
+		<?php if ($this->session->userdata('logged_in') and $this->session->userdata('user_id') == $product['user_id']) : ?>
 			<a href="<?php echo base_url(); ?>products/edit/<?php echo $product['id']; ?>" class="btn btn-default">Edit product</a>
 			<?php echo form_open('/products/delete/'.$product['id']); ?>
 				<?php echo form_submit(array('value' => 'Delete', 'class' => 'btn btn-danger')); ?>

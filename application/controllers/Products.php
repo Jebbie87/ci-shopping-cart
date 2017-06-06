@@ -12,11 +12,13 @@
 
 		public function create() {
 			$data['title'] = 'Create a new product';
+			$data['categories'] = $this->category_model->get_categories();
 
 			// $this->load->library('form_validation');
 			$this->form_validation->set_rules('name', 'name', 'required');
 			$this->form_validation->set_rules('price', 'price', 'required');
 			$this->form_validation->set_rules('description', 'description', 'required');
+			$this->form_validation->set_rules('category_id', 'category', 'required');
 
 			if($this->form_validation->run() === FALSE){
 				$this->load->view('templates/header');
@@ -66,6 +68,7 @@
 
 		public function edit($id) {
 			$data['product'] = $this->product_model->get_products($id);
+			$data['categories'] = $this->category_model->get_categories();
 
 			if (empty($data['product'])) {
 				show_404();
@@ -73,19 +76,43 @@
 
 			$data['title'] = 'Edit product';
 
-			$this->form_validation->set_rules('name', 'name', 'required');
-			$this->form_validation->set_rules('price', 'price', 'required');
-			$this->form_validation->set_rules('description', 'description', 'required');
-
 			$this->load->view('templates/header');
 			$this->load->view('products/edit', $data);
 			$this->load->view('templates/footer');
 		}
 
 		public function update() {
-			$this->product_model->update_product();
 
-			redirect('products');
+			$this->form_validation->set_rules('name', 'name', 'required');
+			$this->form_validation->set_rules('price', 'price', 'required');
+			$this->form_validation->set_rules('description', 'description', 'required');
+			$this->form_validation->set_rules('category_id', 'category', 'required');
+
+			if ($this->form_validation->run() === FALSE) {
+				$this->load->view('templates/header');
+				$this->load->view('products/edit', $data);
+				$this->load->view('templates/footer');
+			} else {
+        $config['upload_path']          = './assets/images/products';
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['max_size']             = 2048;
+        $config['max_width']            = 1024;
+        $config['max_height']           = 768;
+
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload()) {
+          $error = array('error' => $this->upload->display_errors());
+          $product_image = 'noimage.jpg';
+        } else {
+          $data = array('upload_data' => $this->upload->data());
+					$product_image = $_FILES['userfile']['name'];
+        }
+
+				$this->product_model->update_product(FALSE, FALSE, $product_image);
+
+				redirect('products');
+			}
 		}
 
 		public function add_product_to_cart() {

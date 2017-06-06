@@ -31,7 +31,7 @@
 
 			<a href="<?php echo base_url(); ?>products/<?php echo $product['id'] ?>" class="btn btn-default">Details</a>
 
-			<?php if ($this->session->userdata('logged_in')) : ?>
+			<?php if ($this->session->userdata('logged_in') and $this->session->userdata('user_id') === $product['user_id']) : ?>
 				<?php echo form_open('/products/delete/'.$product['id']); ?>
 					<?php echo form_submit(array('value' => 'Delete', 'class' => 'btn btn-danger')); ?>
 					<!-- why doesn't <?php form_close(); ?> work -->
