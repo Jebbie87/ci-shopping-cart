@@ -1,0 +1,101 @@
+.flex-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	width: 100%;
+	padding: 0 50px;
+}
+
+.error-text {
+	color: red;
+}
+.products {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	flex: auto;
+}
+
+.sold-out {
+	background-color: red;
+	text-align: center;
+}
+
+.username-container {
+	margin-top: 19px;
+	color: white;
+}
+
+.username {
+	margin-left: 150px;
+}
+
+.page-title {
+	text-align: center;
+	flex-basis: 100%;
+	margin-bottom: 50px;
+}
+
+.btn {
+	height: 45px;
+	margin: 3px;
+}
+
+.product {
+	display: flex;
+	flex-direction: column;
+	max-width: 260px;
+	max-height: 300px;
+	overflow-y: scroll;
+
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding: 15px;
+	padding-bottom: 80px;
+	margin-top: 20px;
+}
+
+.product-buttons {
+	display: flex;
+}
+
+.product-image {
+	width: 150px;
+	height: 150px;
+}
+
+.product-description {
+	word-wrap: break-word;
+}
+
+.product-form {
+	display: flex;
+	flex-direction: row;
+}
+
+.single-product {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	flex-direction: column;
+}
+
+.single-product-container {
+	display: flex;
+}
+
+.product-view-image {
+	width: 300px;
+	height: 300px;
+}
+
+.comment-container {
+	margin-top: 50px;
+}
+
+.category-type {
+	flex-basis: 100%;
+	text-align: center;
+}
