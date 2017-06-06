@@ -9,6 +9,7 @@
 .error-text {
 	color: red;
 }
+
 .products {
 	display: flex;
 	flex-wrap: wrap;
