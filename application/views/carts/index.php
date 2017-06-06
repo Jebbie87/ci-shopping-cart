@@ -1,11 +1,12 @@
 <h1 class="page-title"><?= $title ?></h1>
 
-
 <div class="container">
 
-<?php echo form_open('carts/delete'); ?>
-	<?php echo form_input(array('value' => 'Delete your cart', 'class' => 'btn btn-danger', 'style' => 'float:right; margin-bottom:50x;', 'type' => 'submit')); ?>
-<?php echo form_close(); ?>
+<?php
+	echo form_open('carts/delete');
+	echo form_input(array('value' => 'Delete your cart', 'class' => 'btn btn-danger', 'style' => 'float:right; margin-bottom:50x;', 'type' => 'submit'));
+  echo form_close();
+?>
 
 <?php echo form_open('carts/update'); ?>
 
@@ -46,11 +47,12 @@
 </table>
 
 <p><?php echo form_submit('cart', 'Update your Cart', "class='btn btn-default'"); ?></p>
-<!-- <input type="submit" class="btn btn-default" value="Update your cart"> -->
 <?php echo form_close() ?>
 
-<?php echo form_open('carts/save_order'); ?>
-	<?php echo form_input(array('value' => 'Submit', 'class' => 'btn btn-default', 'type' => 'submit')); ?>
-<?php echo form_close(); ?>
+<?php
+	echo form_open('carts/save_order');
+	echo form_input(array('value' => 'Submit', 'class' => 'btn btn-default', 'type' => 'submit'));
+ 	echo form_close();
+?>
 
 </div>

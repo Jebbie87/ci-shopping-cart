@@ -23,20 +23,20 @@
 					'name' => $product['name'],
 					'description' => $product['description']
 				);
-			 	 echo form_open('products/add', '', $hidden);
-				 echo form_submit(array('value' => 'Add', 'class' => 'btn btn-default'));
-				?>
-				<!-- why doesn't <?php form_close(); ?> work -->
-			</form>
+			 	echo form_open('products/add', '', $hidden);
+				echo form_submit(array('value' => 'Add', 'class' => 'btn btn-default'));
+				echo form_close();
+			?>
 
 			<a href="<?php echo base_url(); ?>products/<?php echo $product['id'] ?>" class="btn btn-default">Details</a>
 
-			<?php if ($this->session->userdata('logged_in') and $this->session->userdata('user_id') === $product['user_id']) : ?>
-				<?php echo form_open('/products/delete/'.$product['id']); ?>
-					<?php echo form_submit(array('value' => 'Delete', 'class' => 'btn btn-danger')); ?>
-					<!-- why doesn't <?php form_close(); ?> work -->
-				</form>
-			<?php endif; ?>
+			<?php
+				if ($this->session->userdata('logged_in') and $this->session->userdata('user_id') === $product['user_id']) {
+				  echo form_open('/products/delete/'.$product['id']);
+					echo form_submit(array('value' => 'Delete', 'class' => 'btn btn-danger'));
+				  echo form_close();
+				}
+			?>
 		</div>
 	</div>
 <?php endforeach; ?>

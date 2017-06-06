@@ -3,8 +3,10 @@
 <?php echo validation_errors('<span class="error-text">', '</span>'); ?>
 
 <div class="container">
-<?php echo form_open('products/update'); ?>
-	<?php echo form_hidden('id', $product['id']); ?>
+	<?php
+		echo form_open('products/update');
+		echo form_hidden('id', $product['id']);
+	?>
   <div class="form-group">
     <?php
     	echo form_label('Product Name');
@@ -43,6 +45,8 @@
 	  	echo form_upload('userfile');
 	  ?>
   </div>
-  <?php echo form_submit(array('value' => 'Submit', 'class' => 'btn btn-default')); ?>
-<?php echo form_close(); ?>
+  <?php
+  	echo form_submit(array('value' => 'Submit', 'class' => 'btn btn-default'));
+ 		echo form_close();
+ 	?>
 </div>

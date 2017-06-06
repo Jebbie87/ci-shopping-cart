@@ -11,9 +11,11 @@
 		</div>
 		<?php if ($this->session->userdata('logged_in') and $this->session->userdata('user_id') == $product['user_id']) : ?>
 			<a href="<?php echo base_url(); ?>products/edit/<?php echo $product['id']; ?>" class="btn btn-default">Edit product</a>
-			<?php echo form_open('/products/delete/'.$product['id']); ?>
-				<?php echo form_submit(array('value' => 'Delete', 'class' => 'btn btn-danger')); ?>
-			</form>
+			<?php
+				echo form_open('/products/delete/'.$product['id']);
+				echo form_submit(array('value' => 'Delete', 'class' => 'btn btn-danger'));
+				echo form_close();
+			?>
 		<?php endif; ?>
 	</div>
 
@@ -27,11 +29,12 @@
 					<div class="product-buttons">
 						<a href="<?php echo base_url(); ?>comments/edit/<?php echo $comment['id']; ?>" class="btn btn-default">Edit</a>
 						</form>
-						<?php echo form_open('/comments/delete/'.$comment['id']); ?>
-							<?php echo form_hidden('product_id', $product['id']); ?>
-							<?php echo form_submit(array('value' => 'Delete', 'class' => 'btn btn-danger')); ?>
-							<!-- why doesn't <?php form_close(); ?> work -->
-						</form>
+						<?php
+							echo form_open('/comments/delete/'.$comment['id']);
+							echo form_hidden('product_id', $product['id']);
+							echo form_submit(array('value' => 'Delete', 'class' => 'btn btn-danger'));
+							echo form_close();
+						?>
 					</div>
 				<?php endif; ?>
 					<?php $datestring = '%M %d %Y - %h:%i %A'; ?>
@@ -49,16 +52,16 @@
 		<?php echo validation_errors('<span class="error-text">', '</span>'); ?>
 
 		<h2>Add comment</h2>
-		<?php echo form_open('/comments/create/'.$product['id']); ?>
 			<div class="form-group">
-			<?php
-			  echo form_label('Enter name');
-	      echo form_input(array('name' => 'name', 'class' => 'form-control', 'placeholder' => 'Enter name'));
-			  echo form_label('Enter comment');
-	      echo form_textarea(array('name' => 'comment', 'class' => 'form-control', 'placeholder' => 'Enter comment'));
-				echo form_hidden('id', $product['id']);
-	      echo form_submit(array('value' => 'Submit', 'class' => 'btn btn-default'));
-	    ?>
+				<?php
+					echo form_open('/comments/create/'.$product['id']);
+				  echo form_label('Enter name');
+		      echo form_input(array('name' => 'name', 'class' => 'form-control', 'placeholder' => 'Enter name'));
+				  echo form_label('Enter comment');
+		      echo form_textarea(array('name' => 'comment', 'class' => 'form-control', 'placeholder' => 'Enter comment'));
+					echo form_hidden('id', $product['id']);
+		      echo form_submit(array('value' => 'Submit', 'class' => 'btn btn-default'));
+		    ?>
 			</div>
 		</form>
 	</div>
