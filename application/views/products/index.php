@@ -9,7 +9,7 @@
 			<div class="sold-out">Sold out</div>
 		<?php endif; ?>
 		<a href="<?php echo base_url(); ?>products/<?php echo $product['id'] ?>">
-			<img class="product-image" src="<?php echo base_url(); ?>assets/images/products/<?php echo $product['product_image']; ?>">
+			<img class="product-image" src="<?php echo base_url(); echo "assets/images/products/"; echo $product['product_image']; ?>">
 		</a>
 		<p>Name: <?php echo $product['name']; ?></p>
 		<p>Price: <?php echo money_format('%.2n', $product['price']); ?></p>
@@ -28,7 +28,7 @@
 				echo form_close();
 			?>
 
-			<a href="<?php echo base_url(); ?>products/<?php echo $product['id'] ?>" class="btn btn-default">Details</a>
+			<a href="<?php echo base_url(); echo "products/"; echo $product['id'] ?>" class="btn btn-default">Details</a>
 
 			<?php
 				if ($this->session->userdata('logged_in') and $this->session->userdata('user_id') === $product['user_id']) {

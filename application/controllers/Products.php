@@ -101,7 +101,7 @@
 
         $this->load->library('upload', $config);
 
-        if (!$this->upload->do_upload()) {
+        if (!$this->upload->do_upload('userfile')) {
           $error = array('error' => $this->upload->display_errors());
           $product_image = 'noimage.jpg';
         } else {
@@ -109,7 +109,7 @@
 					$product_image = $_FILES['userfile']['name'];
         }
 
-				$this->product_model->update_product(FALSE, FALSE, $product_image);
+				$this->product_model->update_product(NULL, NULL, $product_image);
 
 				redirect('products');
 			}

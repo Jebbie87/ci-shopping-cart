@@ -41,7 +41,7 @@
 	      echo form_textarea(array('name' => 'description', 'class' => 'form-control', 'placeholder' => 'Product description'));
 	    ?>
 	  </div>
-	  <div class="form-group">
+	  <div class="form-group product-buttons">
       <?php
 	    	echo form_label('Product Image File');
 	    	echo form_upload('userfile');

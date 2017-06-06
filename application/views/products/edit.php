@@ -4,7 +4,7 @@
 
 <div class="container">
 	<?php
-		echo form_open('products/update');
+		echo form_open_multipart('products/update');
 		echo form_hidden('id', $product['id']);
 	?>
   <div class="form-group">
@@ -39,11 +39,13 @@
   		echo form_textarea(array('name' => 'description', 'value' => $product['description'], 'class' => 'form-control', 'placeholder' => 'Product description'));
   	?>
   </div>
-  <div class="form-group">
+  <div class="form-group product-buttons">
 	  <?php
 	  	echo form_label('Product Image File');
 	  	echo form_upload('userfile');
 	  ?>
+	  <h2>Current Image: </h2>
+	  <img class="product-image" src="<?php echo base_url(); echo 'assets/images/products/'; echo $product['product_image'] ?>">
   </div>
   <?php
   	echo form_submit(array('value' => 'Submit', 'class' => 'btn btn-default'));
