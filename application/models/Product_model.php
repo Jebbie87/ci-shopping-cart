@@ -40,19 +40,19 @@
 			return true;
 		}
 
-		public function update_product($qty = FALSE, $product_id = FALSE, $product_image = FALSE) {
+		public function update_product($qty = NULL, $product_id = NULL, $product_image = NULL) {
 			$data = array(
 				'name' => $this->input->post('name'),
 				'price' => $this->input->post('price'),
 				'description' => $this->input->post('description'),
-				'category_id' => $this->input->post('category_id')
+				'category_id' => $this->input->post('category_id'),
 			);
 
 			if ($product_image) {
 				$data['product_image'] = $product_image;
 			}
 
-			if ($qty and $product_id) {
+			if ($product_id) {
 				$data = array(
 					'quantity' => $qty
 				);
