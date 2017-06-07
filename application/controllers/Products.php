@@ -2,10 +2,10 @@
 	class Products extends CI_Controller {
 		public function index() {
 			$data['title'] = 'Latest products';
-
 			$data['products'] = $this->product_model->get_products();
+			$data['currencies'] = $this->currency_model->get_currencies();
 
-			$this->load->view('templates/header');
+			$this->load->view('templates/header', $data);
 			$this->load->view('products/index', $data);
 			$this->load->view('templates/footer');
 		}
@@ -21,7 +21,7 @@
 			$this->form_validation->set_rules('category_id', 'category', 'required');
 
 			if($this->form_validation->run() === FALSE){
-				$this->load->view('templates/header');
+				$this->load->view('templates/header', $data);
 				$this->load->view('products/create', $data);
 				$this->load->view('templates/footer');
 			} else {
@@ -49,6 +49,7 @@
 		public function view($id = NULL) {
 			$data['product'] = $this->product_model->get_products($id);
 			$data['comments'] = $this->comment_model->get_comments($id);
+			$data['currencies'] = $this->currency_model->get_currencies();
 
 			if(empty($data['product'])) {
 				show_404();
@@ -56,7 +57,7 @@
 
 			$data['title'] = $data['product']['name'];
 
-			$this->load->view('templates/header');
+			$this->load->view('templates/header', $data);
 			$this->load->view('products/view', $data);
 			$this->load->view('templates/footer');
 		}
@@ -69,6 +70,7 @@
 		public function edit($id) {
 			$data['product'] = $this->product_model->get_products($id);
 			$data['categories'] = $this->category_model->get_categories();
+			$data['currencies'] = $this->currency_model->get_currencies();
 
 			if (empty($data['product'])) {
 				show_404();
@@ -76,7 +78,7 @@
 
 			$data['title'] = 'Edit product';
 
-			$this->load->view('templates/header');
+			$this->load->view('templates/header', $data);
 			$this->load->view('products/edit', $data);
 			$this->load->view('templates/footer');
 		}
@@ -89,7 +91,7 @@
 			$this->form_validation->set_rules('category_id', 'category', 'required');
 
 			if ($this->form_validation->run() === FALSE) {
-				$this->load->view('templates/header');
+				$this->load->view('templates/header', $data);
 				$this->load->view('products/edit', $data);
 				$this->load->view('templates/footer');
 			} else {
@@ -128,4 +130,6 @@
 
 			redirect('products');
 		}
+
+		// function grab_image_name()
 	}

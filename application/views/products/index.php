@@ -11,6 +11,7 @@
 		<a href="<?php echo base_url(); ?>products/<?php echo $product['id'] ?>">
 			<img class="product-image" src="<?php echo base_url(); echo "assets/images/products/"; echo $product['product_image']; ?>">
 		</a>
+
 		<p>Name: <?php echo $product['name']; ?></p>
 		<p>Price: <?php echo money_format('%.2n', $product['price']); ?></p>
 		<p>Description: <?php echo $product['description']; ?></p>

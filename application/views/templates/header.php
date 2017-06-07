@@ -17,7 +17,6 @@
 					<li class="categories"><a href="<?php echo base_url(); ?>categories">Categories</a></li>
 					<?php if ($this->session->userdata('logged_in')) : ?>
 						<li><a href="<?php echo base_url(); ?>products/create">Add a product</a></li>
-						<li class="username-container"><span class="username">Welcome <?php echo $this->session->userdata('username'); ?></span></li>
 					<?php endif; ?>
 
 					<?php if (!$this->session->userdata('logged_in')) : ?>
@@ -30,6 +29,19 @@
 				<?php if ($this->session->userdata('logged_in')) : ?>
 					<li><a href="<?php echo base_url(); ?>users/logout">Logout</a></li>
 				<?php endif; ?>
+					<li><a>Currency</a></li>
+						<?php
+							$options = array();
+
+							foreach (array_keys($currencies) as $currency) {
+								$options[$currency] = $currencies[$currency].' ('. $currency.')';
+							};
+
+							echo form_open('currencies');
+							echo form_dropdown('currency', $options);
+							echo form_submit(array('value' => 'Submit'));
+							echo form_close();
+						?>
 					<li><a href="<?php echo base_url(); ?>carts">My cart (<?php echo $this->cart->total_items(); ?>)</a></li>
 			</div>
 		</div>
