@@ -24,7 +24,6 @@
 		<?php if($comments) : ?>
 			<?php foreach ($comments as $comment) : ?>
 				<div class="well">
-
 				<?php if ($comment['user_id'] === $this->session->userdata('user_id')) : ?>
 					<div class="product-buttons">
 						<a href="<?php echo base_url(); ?>comments/edit/<?php echo $comment['id']; ?>" class="btn btn-default">Edit</a>

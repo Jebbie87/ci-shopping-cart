@@ -46,7 +46,7 @@
 			<a href="<?php echo base_url(); ?>products/<?php echo $product['id'] ?>" class="btn btn-default">Details</a>
 
 			<?php
-				if ($this->session->userdata('logged_in')) {
+				if ($this->session->userdata('logged_in') and $this->session->userdata('user_id') === $product['user_id']) {
 					echo form_open('/products/delete/'.$product['id']);
 					echo form_submit(array('value' => 'Delete', 'class' => 'btn btn-danger'));
 					echo form_close();

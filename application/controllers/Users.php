@@ -1,16 +1,20 @@
 <?php
-	class Users extends CI_Controller {
+	class Users extends MY_Controller {
+		public function __construct() {
+			parent::__construct();
+		}
+
 		public function index() {
+			$data = $this->data;
 			$data['title'] = 'Latest products';
 
-			$data['products'] = $this->product_model->get_products();
-
-			$this->load->view('templates/header');
+			$this->load->view('templates/header', $data);
 			$this->load->view('products/index', $data);
 			$this->load->view('templates/footer');
 		}
 
 		public function register() {
+			$data = $this->data;
 			$data['title'] = 'Register page';
 
 			$this->form_validation->set_rules('email', 'email', 'required|callback_check_email_exists');
@@ -18,7 +22,7 @@
 			$this->form_validation->set_rules('username', 'username', 'required|callback_check_username_exists');
 
 			if($this->form_validation->run() === FALSE){
-				$this->load->view('templates/header');
+				$this->load->view('templates/header', $data);
 				$this->load->view('users/register', $data);
 				$this->load->view('templates/footer');
 			} else {
@@ -29,13 +33,14 @@
 		}
 
 		public function login() {
+			$data = $this->data;
 			$data['title'] = 'Login page';
 
 			$this->form_validation->set_rules('email', 'email', 'required');
 			$this->form_validation->set_rules('password', 'password', 'required');
 
 			if($this->form_validation->run() === FALSE){
-				$this->load->view('templates/header');
+				$this->load->view('templates/header', $data);
 				$this->load->view('users/login', $data);
 				$this->load->view('templates/footer');
 			} else {

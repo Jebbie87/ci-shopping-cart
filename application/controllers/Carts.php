@@ -1,10 +1,14 @@
 <?php
-	class Carts extends CI_Controller {
+	class Carts extends MY_Controller {
+		public function __construct() {
+			parent::__construct();
+		}
+
 		public function index() {
+			$data = $this->data;
 			$data['title'] = 'Your current order';
 
-
-			$this->load->view('templates/header');
+			$this->load->view('templates/header', $data);
 			$this->load->view('carts/index', $data);
 			$this->load->view('templates/footer');
 		}

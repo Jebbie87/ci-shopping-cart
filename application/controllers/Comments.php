@@ -1,6 +1,11 @@
 <?php
-	class Comments extends CI_Controller {
+	class Comments extends MY_Controller {
+		public function __construct() {
+			parent::__construct();
+		}
+
 		public function create() {
+			$data = $this->data;
 			$id = $this->input->post('id');
 
 			$data['product'] = $this->product_model->get_products($id);
@@ -11,7 +16,7 @@
 			$data['title'] = $data['product']['name'];
 
 			if ($this->form_validation->run() === FALSE) {
-				$this->load->view('templates/header');
+				$this->load->view('templates/header', $data);
 				$this->load->view('products/view', $data);
 				$this->load->view('templates/footer');
 			} else {
@@ -29,11 +34,12 @@
 		}
 
 		public function edit($comment_id) {
+			$data = $this->data;
 			$data['comment'] = $this->comment_model->get_comment($comment_id);
 
 			$data['title'] = 'Edit comment';
 
-			$this->load->view('templates/header');
+			$this->load->view('templates/header', $data);
 			$this->load->view('comments/edit', $data);
 			$this->load->view('templates/footer');
 		}

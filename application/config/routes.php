@@ -66,6 +66,8 @@ $route['categories'] = 'categories/index';
 
 $route['comments/update'] = 'comments/update';
 
+$route['currency/view'] = 'currency/get_currency';
+
 $route['users/register'] = 'users/register';
 $route['users/login'] = 'users/login';
 

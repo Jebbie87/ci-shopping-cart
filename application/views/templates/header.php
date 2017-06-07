@@ -29,7 +29,6 @@
 				<?php if ($this->session->userdata('logged_in')) : ?>
 					<li><a href="<?php echo base_url(); ?>users/logout">Logout</a></li>
 				<?php endif; ?>
-					<li><a>Currency</a></li>
 						<?php
 							$options = array();
 
@@ -37,8 +36,8 @@
 								$options[$currency] = $currencies[$currency].' ('. $currency.')';
 							};
 
-							echo form_open('currencies');
-							echo form_dropdown('currency', $options);
+							echo form_open('currency/view');
+							echo form_dropdown('currency', $options, 'USD');
 							echo form_submit(array('value' => 'Submit'));
 							echo form_close();
 						?>

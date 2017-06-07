@@ -13,7 +13,8 @@
 		</a>
 
 		<p>Name: <?php echo $product['name']; ?></p>
-		<p>Price: <?php echo money_format('%.2n', $product['price']); ?></p>
+
+		<p>Price: <?php echo money_format('%.2n', $product['price'] * $current_price); ?></p>
 		<p>Description: <?php echo $product['description']; ?></p>
 		<p>Quantity: <?php echo $product['quantity']; ?></p>
 		<div class="product-buttons">

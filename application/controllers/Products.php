@@ -1,9 +1,16 @@
 <?php
-	class Products extends CI_Controller {
+	class Products extends MY_Controller {
+		public function __construct() {
+			parent::__construct();
+		}
+
 		public function index() {
+			$data = $this->data;
 			$data['title'] = 'Latest products';
-			$data['products'] = $this->product_model->get_products();
-			$data['currencies'] = $this->currency_model->get_currencies();
+
+			// echo "<pre>";
+			// echo $data['currency'];
+			// echo $data['current_price'] ? $data['current_price'] : 'hello';
 
 			$this->load->view('templates/header', $data);
 			$this->load->view('products/index', $data);
@@ -11,8 +18,8 @@
 		}
 
 		public function create() {
+			$data = $this->data;
 			$data['title'] = 'Create a new product';
-			$data['categories'] = $this->category_model->get_categories();
 
 			// $this->load->library('form_validation');
 			$this->form_validation->set_rules('name', 'name', 'required');
@@ -26,19 +33,19 @@
 				$this->load->view('templates/footer');
 			} else {
         $config['upload_path']          = './assets/images/products';
-        $config['allowed_types']        = 'gif|jpg|png';
+        $config['allowed_types']        = 'gif|jpg|png|jpeg';
         $config['max_size']             = 2048;
         $config['max_width']            = 1024;
         $config['max_height']           = 768;
 
         $this->load->library('upload', $config);
 
-        if (!$this->upload->do_upload('userfile')) {
+        if (!$this->upload->do_upload('userfile-create')) {
           $error = array('error' => $this->upload->display_errors());
           $product_image = 'noimage.jpg';
         } else {
           $data = array('upload_data' => $this->upload->data());
-					$product_image = $_FILES['userfile']['name'];
+					$product_image = $_FILES['userfile-create']['name'];
         }
 
 				$this->product_model->create_product($product_image);
@@ -47,9 +54,9 @@
 		}
 
 		public function view($id = NULL) {
+			$data = $this->data;
 			$data['product'] = $this->product_model->get_products($id);
 			$data['comments'] = $this->comment_model->get_comments($id);
-			$data['currencies'] = $this->currency_model->get_currencies();
 
 			if(empty($data['product'])) {
 				show_404();
@@ -68,9 +75,8 @@
 		}
 
 		public function edit($id) {
+			$data = $this->data;
 			$data['product'] = $this->product_model->get_products($id);
-			$data['categories'] = $this->category_model->get_categories();
-			$data['currencies'] = $this->currency_model->get_currencies();
 
 			if (empty($data['product'])) {
 				show_404();
@@ -84,6 +90,7 @@
 		}
 
 		public function update() {
+			$data = $this->data;
 
 			$this->form_validation->set_rules('name', 'name', 'required');
 			$this->form_validation->set_rules('price', 'price', 'required');
@@ -96,7 +103,7 @@
 				$this->load->view('templates/footer');
 			} else {
         $config['upload_path']          = './assets/images/products';
-        $config['allowed_types']        = 'gif|jpg|png';
+        $config['allowed_types']        = 'gif|jpg|png|jpeg';
         $config['max_size']             = 2048;
         $config['max_width']            = 1024;
         $config['max_height']           = 768;

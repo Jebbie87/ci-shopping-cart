@@ -44,7 +44,7 @@
 	  <div class="form-group product-buttons">
       <?php
 	    	echo form_label('Product Image File');
-	    	echo form_upload('userfile');
+	    	echo form_upload('userfile-create');
 	    ?>
 	  </div>
 	  <?php echo form_submit(array('value' => 'Submit', 'class' => 'btn btn-default')); ?>
